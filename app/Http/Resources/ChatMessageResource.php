@@ -11,7 +11,7 @@ class ChatMessageResource extends JsonResource
     {
         // Coba decode konten, jika gagal (artinya itu pesan user biasa), kembalikan teks asli
         $content = json_decode($this->content, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
+        if (json_last_error() != JSON_ERROR_NONE) {
             $content = $this->content;
         }
 

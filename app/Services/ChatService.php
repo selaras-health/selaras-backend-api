@@ -237,9 +237,9 @@ class ChatService
       $content = $message->content;
 
       // Jika peran adalah 'model', kita ekstrak teks dari JSON untuk dimasukkan ke histori
-      if ($role === 'model') {
+      if ($role == 'model') {
         $decoded = json_decode($content, true);
-        if (json_last_error() === JSON_ERROR_NONE && isset($decoded['reply_components'][0]['content'])) {
+        if (json_last_error() == JSON_ERROR_NONE && isset($decoded['reply_components'][0]['content'])) {
           $content = $decoded['reply_components'][0]['content'];
         } else {
           $content = '[Balasan terstruktur]';

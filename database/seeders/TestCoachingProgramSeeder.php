@@ -257,7 +257,7 @@ class TestCoachingProgramSeeder extends Seeder
                     'task_type' => 'main_mission',
                     'title' => "Misi Utama Hari {$day}",
                     'description' => $this->getTaskDescription('main_mission', $weekNum, $day),
-                    'is_completed' => $program->status === 'completed' ? true : (rand(0, 100) < 70), // 70% completion rate
+                    'is_completed' => $program->status == 'completed' ? true : (rand(0, 100) < 70), // 70% completion rate
                 ]);
 
                 // Bonus challenge (random, tidak setiap hari)
@@ -269,7 +269,7 @@ class TestCoachingProgramSeeder extends Seeder
                         'task_type' => 'bonus_challenge',
                         'title' => "Tantangan Bonus Hari {$day}",
                         'description' => $this->getTaskDescription('bonus_challenge', $weekNum, $day),
-                        'is_completed' => $program->status === 'completed' ? true : (rand(0, 100) < 30), // 30% completion rate
+                        'is_completed' => $program->status == 'completed' ? true : (rand(0, 100) < 30), // 30% completion rate
                     ]);
                 }
             }
@@ -324,7 +324,7 @@ class TestCoachingProgramSeeder extends Seeder
 
     private function getTaskDescription($type, $weekNum, $day)
     {
-        if ($type === 'main_mission') {
+        if ($type == 'main_mission') {
             $tasks = [
                 'Lakukan olahraga ringan selama 30 menit',
                 'Konsumsi minimal 8 gelas air putih',
@@ -380,7 +380,7 @@ class TestCoachingProgramSeeder extends Seeder
 
     private function getExpectedAction($program, $daysAgo)
     {
-        if ($program->status === 'completed') {
+        if ($program->status == 'completed') {
             return '❌ DIABAIKAN (sudah completed)';
         }
         

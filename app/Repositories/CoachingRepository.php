@@ -87,7 +87,7 @@ class CoachingRepository
   {
     $user = $programToResume->userProfile->user;
 
-    if ($programToResume->status === 'completed') {
+    if ($programToResume->status == 'completed') {
       Log::warning("Program {$programToResume->slug} sudah selesai, status: {$programToResume->status}");
       throw new Exception('Tidak bisa mengaktifkan program yang sudah selsai');
     }
@@ -117,7 +117,7 @@ class CoachingRepository
   {
     $user = $program->userProfile->user;
 
-    if ($program->status === 'completed') {
+    if ($program->status == 'completed') {
       Log::warning("Program {$program->slug} sudah selesai, status: {$program->status}");
       throw new Exception('Tidak bisa mengaktifkan program yang sudah selesai');
     }
@@ -180,7 +180,7 @@ class CoachingRepository
    */
   public function completeProgram(CoachingProgram $program): bool
   {
-    if ($program->status !== 'active') {
+    if ($program->status != 'active') {
       Log::warning("Program {$program->slug} sudah tidak aktif, status: {$program->status}");
       return false;
     }

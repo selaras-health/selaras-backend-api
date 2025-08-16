@@ -145,7 +145,7 @@ PROGRAM;
         $dayName = $taskDateCarbon->translatedFormat('l, d M');
         $marker = $taskDateCarbon->isToday() ? " (HARI INI)" : "";
         $status = $task->is_completed ? " [✓ Selesai]" : " [□ Belum]";
-        $type = ($task->task_type === 'main_mission') ? "Misi Utama" : "Tantangan Bonus";
+        $type = ($task->task_type == 'main_mission') ? "Misi Utama" : "Tantangan Bonus";
 
         $context .= "- {$dayName}{$marker} ({$type}): {$task->title}{$status}\n";
         $context .= "  - Deskripsi Tugas: {$task->description}\n";
@@ -317,13 +317,13 @@ PROMPT;
 
     foreach ($messages as $message) {
       // [PERBAIKAN] Menyesuaikan 'role' agar sesuai dengan standar API ('user' atau 'model')
-      $role = ($message->role === 'user') ? 'user' : 'model';
+      $role = ($message->role == 'user') ? 'user' : 'model';
 
       // Logika untuk mengekstrak teks dari balasan AI yang disimpan sebagai JSON
       $content = $message->content;
-      if ($role === 'model') {
+      if ($role == 'model') {
         $decoded = json_decode($content, true);
-        if (json_last_error() === JSON_ERROR_NONE && isset($decoded['reply_components'][0]['content'])) {
+        if (json_last_error() == JSON_ERROR_NONE && isset($decoded['reply_components'][0]['content'])) {
           $content = $decoded['reply_components'][0]['content'];
         } else {
           $content = '[Pesan dari Coach]';

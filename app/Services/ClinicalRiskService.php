@@ -82,7 +82,7 @@ class ClinicalRiskService
     $values['age'] = Carbon::parse($profile->date_of_birth)->age;
     $values['sex_label'] = $profile->sex; // 'male' or 'female'
 
-    $values['is_smoker'] = ($answers['smoking_status'] === 'Perokok aktif');
+    $values['is_smoker'] = ($answers['smoking_status'] == 'Perokok aktif');
     $values['has_diabetes'] = (bool)$answers['has_diabetes'];
 
     // Proses setiap parameter secara modular
@@ -134,7 +134,7 @@ class ClinicalRiskService
     if (($proxyAns['q_cooking_oil'] ?? '') == 'Minyak kelapa sawit atau minyak goreng curah') $chol += 1.2;
     if (($proxyAns['q_exercise_type'] ?? '') == 'Hampir tidak pernah') $chol += 0.5;
     if (($proxyAns['q_xanthoma'] ?? 'Tidak') == 'Ya') $chol += 3.0;
-    if ($allAnswers['smoking_status'] === 'Perokok aktif') $chol += 0.4;
+    if ($allAnswers['smoking_status'] == 'Perokok aktif') $chol += 0.4;
 
     if (($proxyAns['q_fish_intake'] ?? '') == '2 kali seminggu atau lebih') $chol -= 0.3;
 
@@ -151,7 +151,7 @@ class ClinicalRiskService
     elseif ($exerciseType == 'Rutin tapi ringan (jalan kaki)') $hdl += 0.1;
     else $hdl -= 0.2;
 
-    if ($allAnswers['smoking_status'] === 'Perokok aktif') $hdl -= 0.25;
+    if ($allAnswers['smoking_status'] == 'Perokok aktif') $hdl -= 0.25;
 
     if (($proxyAns['q_fish_intake'] ?? 'Jarang') == '2 kali seminggu atau lebih') $hdl += 0.15;
 
@@ -178,7 +178,7 @@ class ClinicalRiskService
     if (($proxyAns['q_retinopathy_neuropathy'] ?? 'Tidak') == 'Ya') $damage_points += 0.3;
 
     $stressor_points = 0.0;
-    if ($allAnswers['smoking_status'] === 'Perokok aktif') $stressor_points += 0.1;
+    if ($allAnswers['smoking_status'] == 'Perokok aktif') $stressor_points += 0.1;
     if (($proxyAns['q_nsaid_use_scr'] ?? 'Jarang') == 'Sering') $stressor_points += 0.15;
     if (($proxyAns['q_foamy_urine_scr'] ?? 'Tidak pernah') == 'Ya, sering') $stressor_points += 0.25;
 

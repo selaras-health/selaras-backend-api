@@ -117,7 +117,7 @@ class CoachingController extends Controller
         $updatedProgram = null;
 
         // 2. Logika Toggle berdasarkan status program saat ini
-        if ($program->status === 'active') {
+        if ($program->status == 'active') {
             // Aksi: PAUSE program
             $updatedProgram = $this->coachingRepository->pauseProgram($program);
 
@@ -125,7 +125,7 @@ class CoachingController extends Controller
             $this->dashboardRepository->forgetDashboardCache($request->user());
 
             $message = 'Program has been paused successfully.';
-        } else if ($program->status === 'paused') {
+        } else if ($program->status == 'paused') {
             // Aksi: RESUME program
             // Perhatikan kita passing $request->user() sesuai kebutuhan metode ini
             $updatedProgram = $this->coachingRepository->resumeProgram($program, $request->user());

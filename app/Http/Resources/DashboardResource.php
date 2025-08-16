@@ -147,7 +147,7 @@ class DashboardResource extends JsonResource
         $currentWeek = 0;
 
         // Logika berdasarkan status program
-        if ($program->status === 'active' && $today->between($programStartDate, $programEndDate)) {
+        if ($program->status == 'active' && $today->between($programStartDate, $programEndDate)) {
             // Program sedang aktif
             $daysPassed = $today->diffInDays($programStartDate); // Tidak perlu 'false' lagi
             $currentDay = $daysPassed + 1;
@@ -156,7 +156,7 @@ class DashboardResource extends JsonResource
             // Pastikan tidak melebihi total
             if ($currentDay > $totalDays) $currentDay = $totalDays;
             if ($currentWeek > $totalWeeks) $currentWeek = $totalWeeks;
-        } elseif ($program->status === 'completed' || $today->isAfter($programEndDate)) {
+        } elseif ($program->status == 'completed' || $today->isAfter($programEndDate)) {
             // Program sudah selesai
             $currentDay = $totalDays;
             $currentWeek = $totalWeeks;
@@ -167,7 +167,7 @@ class DashboardResource extends JsonResource
         }
 
         return [
-            'is_active'      => $program->status === 'active' && $today->between($programStartDate, $programEndDate),
+            'is_active'      => $program->status == 'active' && $today->between($programStartDate, $programEndDate),
             'slug'           => $program->slug,
             'title'          => $program->title,
             'description'    => $program->description,
